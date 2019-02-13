@@ -7,8 +7,13 @@
     "test": "jest"
   },
   "dependencies": {
-    "react": "16.6.3",
-    "react-native": "0.58.4"
+    "create-react-class": "^15.6.3",
+    "prop-types": "^15.7.1",
+    "react": "^16.6.3",
+    "react-codemirror": "^1.0.0",
+    "react-native": "0.58.4",
+    "react-native-deprecated-custom-components": "^0.1.2",
+    "sendbird": "^3.0.93"
   },
   "devDependencies": {
     "babel-core": "7.0.0-bridge.0",
