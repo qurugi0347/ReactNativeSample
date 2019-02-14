@@ -30,15 +30,29 @@ export default class Mypage extends Component {
             color="#AAA"
           />
         </View>
-        <View style={{ flex: 1, flexDirection: 'row' }}>
-          <View style={styles.grade_view}>
-            <Text style={styles.grade_text}>회원등급</Text>
+        <View style={[{ flexDirection: 'row', alignSelf: 'baseline' }]}>
+          <View
+          style={[
+            styles.grade_view,
+            styles.borderR, { width: '50%', height: 85 }
+          ]}
+          >
+            <Text style={styles.grade_text}>사용가능 쿠폰</Text>
             <Text style={styles.grade_num}>-</Text>
           </View>
-          <View style={styles.grade_view}>
-            <Text style={styles.grade_text}>회원등급</Text>
+          <View style={[styles.grade_view, { width: '50%', height: 85 }]}>
+            <Text style={styles.grade_text}>마일리지</Text>
             <Text style={styles.grade_num}>-</Text>
           </View>
+        </View>
+        <View style={[{ padding: 20 }]}>
+          <Text
+          style={{
+              fontSize: 24,
+              fontWeight: 'bold'
+            }}
+          >나의 쇼핑정보</Text>
+          <View style={{ backgroundColor: '#000', height: 4, marginTop: 10 }} />
         </View>
       </View>
     );
@@ -64,11 +78,9 @@ const styles = StyleSheet.create({
     borderColor: '#999',
     borderBottomWidth: 1
   },
-  grade_div_view: {
-    padding: 15,
-    width: '50%',
+  borderR: {
     borderColor: '#999',
-    borderBottomWidth: 1
+    borderRightWidth: 1
   },
   grade_num: {
     marginTop: 5,
@@ -78,5 +90,8 @@ const styles = StyleSheet.create({
   grade_text: {
     fontSize: 16,
     color: '#AAA'
+  },
+  defaultPaddingX: {
+    padding: 20
   }
 });
