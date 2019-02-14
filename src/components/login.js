@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { Button } from 'react-native-elements';
 import { StyleSheet, Text, View } from 'react-native';
 
+
 type Props = {};
 export default class Mypage extends Component<Props> {
   render() {
-    const { navigate } = this.props.navigation;
     return (
       <View style={{ backgroundColor: '#FFF', flex: 1 }}>
         <View style={styles.top}>
@@ -16,48 +16,20 @@ export default class Mypage extends Component<Props> {
           <Text style={styles.grade_text}>회원등급</Text>
           <Text style={styles.grade_num}>-</Text>
           <Button
-            onPress={() => {
-              navigate('Login');
-            }}
+            onPress={() => { }}
             buttonStyle={{
               backgroundColor: '#AAA',
               width: 140,
               height: 40,
-              position: 'absolute',
               borderRadius: 20,
+              position: 'absolute',
               top: -45,
-              right: 10,
-              zIndex: 10
+              right: 10
             }}
             type="solid"
             title="할인혜택 보기"
             color="#AAA"
           />
-        </View>
-        <View style={[{ flexDirection: 'row', alignSelf: 'baseline' }]}>
-          <View
-          style={[
-            styles.grade_view,
-            styles.borderR,
-            { flex: 1, height: 85 }
-          ]}
-          >
-            <Text style={styles.grade_text}>사용가능 쿠폰</Text>
-            <Text style={styles.grade_num}>-</Text>
-          </View>
-          <View
-          style={[
-            styles.grade_view,
-            { flex: 1, height: 85 }
-          ]}
-          >
-            <Text style={styles.grade_text}>마일리지</Text>
-            <Text style={styles.grade_num}>-</Text>
-          </View>
-        </View>
-        <View style={[{ padding: 20 }]}>
-          <Text style={{ fontSize: 24, fontWeight: 'bold' }}>나의 쇼핑정보</Text>
-          <View style={{ backgroundColor: '#000', height: 4, marginTop: 10 }} />
         </View>
       </View>
     );
