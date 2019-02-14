@@ -34,24 +34,25 @@ export default class Mypage extends Component {
           <View
           style={[
             styles.grade_view,
-            styles.borderR, { width: '50%', height: 85 }
+            styles.borderR,
+            { flex: 1, height: 85 }
           ]}
           >
             <Text style={styles.grade_text}>사용가능 쿠폰</Text>
             <Text style={styles.grade_num}>-</Text>
           </View>
-          <View style={[styles.grade_view, { width: '50%', height: 85 }]}>
+          <View
+          style={[
+            styles.grade_view,
+            { flex: 1, height: 85 }
+          ]}
+          >
             <Text style={styles.grade_text}>마일리지</Text>
             <Text style={styles.grade_num}>-</Text>
           </View>
         </View>
         <View style={[{ padding: 20 }]}>
-          <Text
-          style={{
-              fontSize: 24,
-              fontWeight: 'bold'
-            }}
-          >나의 쇼핑정보</Text>
+          <Text style={{ fontSize: 24, fontWeight: 'bold' }}>나의 쇼핑정보</Text>
           <View style={{ backgroundColor: '#000', height: 4, marginTop: 10 }} />
         </View>
       </View>
