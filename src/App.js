@@ -9,6 +9,10 @@
 
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
+import { createBottomTabNavigator, BottomTabBar } from 'react-navigation-tabs';
+import { StackNavigator, createAppContainer } from 'react-navigation';
+import Home from './components/home';
+import Mypage from './components/mypage';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -17,18 +21,40 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
+const TabNavigator = createBottomTabNavigator({
+    Home: {
+      // `ProfileScreen` is a React component that will be the main content of the screen.
+      screen: Home,
+      // When `ProfileScreen` is loaded by the StackNavigator, it will be given a `navigation` prop.
+
+      // Optional: Override the `navigationOptions` for the screen
+      navigationOptions: ({ navigation }) => ({
+        title: `홈`,
+      })
+    },
+    Mypage: {
+      // `ProfileScreen` is a React component that will be the main content of the screen.
+      screen: Mypage,
+      // When `ProfileScreen` is loaded by the StackNavigator, it will be given a `navigation` prop.
+
+      // Optional: Override the `navigationOptions` for the screen
+      navigationOptions: ({ navigation }) => ({
+        title: `마이페이지`,
+      }),
+    }
+});
+
 type Props = {};
-export default class App extends Component<Props> {
+class App extends Component<Props> {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-      </View>
+
+      <TabNavigator style={{ flex:1 }} />
     );
   }
 }
+
+export default createAppContainer(TabNavigator);
 
 const styles = StyleSheet.create({
   container: {
