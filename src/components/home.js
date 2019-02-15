@@ -1,35 +1,58 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, TouchableHighlight } from 'react-native';
-import { Navigator } from 'react-native-deprecated-custom-components';
-
-
-const routes = [
-  { title: 'First Scene', index: 0 },
-  { title: 'Second Scene', index: 1 }
-];
+import { StyleSheet, Text, View, ListView, Alert } from 'react-native';
 
 type Props = {};
 export default class Home extends Component<Props> {
+  constructor(props) {
+    super(props);
+    const ds = new ListView.DataSource({
+      rowHasChanged: (r1, r2) => r1 !== r2,
+    });
+    this.state = {
+      //Making data set for list
+      dataSource: ds.cloneWithRows([
+        'Button', 'Card', 'Input', 'Avatar', 'CheckBox',
+        'Header', 'Icon', 'Lists', 'Rating ', 'Pricing',
+      ]),
+    };
+  }
+
+  showItem(rowData) {
+    //Alert on the click of list Item
+    Alert.alert(rowData);
+  }
+
+  renderHeader = () => {
+    return (
+      <View>
+        <Text>This is Header</Text>
+      </View>
+    );
+  }
+
   render() {
     return (
-      <Navigator
-        initialRoute={routes[0]}
-        initialRouteStack={routes}
-        renderScene={(route, navigator) =>
-          <TouchableHighlight
-            onPress={() => {
-              if (route.index === 0) {
-                navigator.push(routes[1]);
-              } else {
-                navigator.pop();
-              }
-            }}
-          >
-          <Text>Hello {route.title}!</Text>
-          </TouchableHighlight>
-        }
-        style={styles.container}
-      />
+      <View style={{ flex: 1 }}>
+        <ListView
+          dataSource={this.state.dataSource}
+          //dataSource to add data in the list
+          renderHeader={this.renderHeader}
+          //Header to show above listview
+          //renderFooter={this.renderFooter}
+          //Footer to show below listview
+          renderSeparator={this.ListViewItemSeparator}
+          //List Item separator
+          renderRow={rowData => (
+            //Rendering Single Row
+            <Text
+              style={styles.rowViewContainer}
+              onPress={this.showItem.bind(this, rowData)}
+            >
+              {rowData}
+            </Text>
+          )}
+        />
+      </View>
     );
   }
 }
