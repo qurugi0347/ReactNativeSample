@@ -38,7 +38,7 @@ const rootNav = createStackNavigator(
   {
     initialRouteName: 'Main',
   }
-  );
+);
 
 
 export default createAppContainer(rootNav);
