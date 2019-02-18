@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, ListView, Alert, Image } from 'react-native';
+import { StyleSheet, Text, View, ListView, Image } from 'react-native';
 import { datas } from '../sampleData/postDatas';
+import { popPost } from '../components/mainListItem';
 
 type Props = {};
 export default class Home extends Component<Props> {
@@ -15,6 +16,7 @@ export default class Home extends Component<Props> {
       //Making data set for list
       dataSource: ds.cloneWithRowsAndSections(dataMap),
     };
+    console.log(popPost);
   }
 
   convertDataArrToSection(dataArr) {
@@ -26,11 +28,6 @@ export default class Home extends Component<Props> {
       categoryMap[data.category].push(data);
     });
     return categoryMap;
-  }
-
-  showItem(rowData) {
-    //Alert on the click of list Item
-    Alert.alert(rowData.title);
   }
 
   renderHeader = () => {
@@ -76,29 +73,7 @@ export default class Home extends Component<Props> {
           //Footer to show below listview
           renderSeparator={this.ListViewItemSeparator}
           //List Item separator
-          renderRow={rowData => (
-            //Rendering Single Row
-            <View style={styleListRow.holder}>
-              <View style={{ flex: 1 }}>
-                <Text
-                  style={styleListRow.title}
-                  onPress={this.showItem.bind(this, rowData)}
-                >
-                  {rowData.title}
-                </Text>
-                <Text
-                  style={styleListRow.desc}
-                >
-                  {rowData.desc}
-                </Text>
-              </View>
-
-              <Image
-                style={styleListRow.sideImg}
-                source={{ uri: rowData.imgUrl }}
-              />
-            </View>
-          )}
+          renderRow={popPost.bind(this)}
           renderSeparator={
             (sectionId, rowId) =>
               <View key={rowId} style={styleListRow.separator} />
