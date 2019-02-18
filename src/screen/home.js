@@ -99,11 +99,15 @@ export default class Home extends Component<Props> {
               />
             </View>
           )}
-          renderSeparator={(sectionId, rowId) => <View key={rowId} style={styleListRow.separator} />}
-          renderSectionHeader={(sectionData, category) => {
-            return (
-              <Text style={{ fontWeight: '700', backgroundColor: '#CFC' }}>{category}</Text>
-            );
+          renderSeparator={
+            (sectionId, rowId) =>
+              <View key={rowId} style={styleListRow.separator} />
+          }
+          renderSectionHeader={
+            (sectionData, category) => {
+              return (
+                <Text style={{ fontWeight: '700', backgroundColor: '#CFC' }}>{category}</Text>
+              );
           }}
         />
       </View>

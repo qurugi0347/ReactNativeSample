@@ -11,9 +11,9 @@ import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 import { createBottomTabNavigator, BottomTabBar } from 'react-navigation-tabs';
 import { StackNavigator, createStackNavigator, createAppContainer } from 'react-navigation';
-import Home from './components/home';
-import Mypage from './components/mypage';
-import Login from './components/login';
+import Home from './screen/home';
+import Mypage from './screen/mypage';
+import Login from './screen/login';
 
 const mainTabNav = createBottomTabNavigator({
     Home: {
