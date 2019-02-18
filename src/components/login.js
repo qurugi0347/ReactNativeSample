@@ -16,7 +16,11 @@ export default class Mypage extends Component<Props> {
           <Text style={styles.grade_text}>회원등급</Text>
           <Text style={styles.grade_num}>-</Text>
           <Button
-            onPress={() => { }}
+            onPress={() => {
+              this.props.navigation.navigate('Main');
+              console.log(this.props.navigation);
+              this.props.navigation.getChildNavigation('Main').navigate('Home');
+            }}
             buttonStyle={{
               backgroundColor: '#AAA',
               width: 140,
