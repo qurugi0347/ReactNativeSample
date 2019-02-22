@@ -7,28 +7,49 @@ const showItem = (rowData) => {
 };
 
 export const popPost = rowData => {
-  return (
-    <View style={styleListRow.holder}>
-      <View style={{ flex: 1 }}>
-        <Text
-          style={styleListRow.title}
-          onPress={showItem.bind(this, rowData)}
-        >
-          {rowData.title}
-        </Text>
-        <Text
-          style={styleListRow.desc}
-        >
-          {rowData.desc}
-        </Text>
-      </View>
+  switch (rowData.category) {
+    case 'lastest':
+    return (
+      <View style={styleListRow.holder}>
+        <View style={{ flex: 1 }}>
+          <Text
+            style={styleListRow.title}
+            onPress={showItem.bind(this, rowData)}
+          >
+            {rowData.title}
+          </Text>
+        </View>
 
-      <Image
-        style={styleListRow.sideImg}
-        source={{ uri: rowData.imgUrl }}
-      />
-    </View>
-  );
+        <Image
+          style={styleListRow.sideImg}
+          source={{ uri: rowData.imgUrl }}
+        />
+      </View>
+    );//lastest
+    default:
+    return (
+      <View style={styleListRow.holder}>
+        <View style={{ flex: 1 }}>
+          <Text
+            style={styleListRow.title}
+            onPress={showItem.bind(this, rowData)}
+          >
+            {rowData.title}
+          </Text>
+          <Text
+            style={styleListRow.desc}
+          >
+            {rowData.desc}
+          </Text>
+        </View>
+
+        <Image
+          style={styleListRow.sideImg}
+          source={{ uri: rowData.imgUrl }}
+        />
+      </View>
+    );//default
+  }
 };
 
 

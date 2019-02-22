@@ -73,7 +73,9 @@ export default class Home extends Component<Props> {
           //Footer to show below listview
           renderSeparator={this.ListViewItemSeparator}
           //List Item separator
-          renderRow={popPost.bind(this)}
+          renderRow={
+            popPost.bind(this)
+          }
           renderSeparator={
             (sectionId, rowId) =>
               <View key={rowId} style={styleListRow.separator} />
