@@ -7,7 +7,7 @@ const showItem = (rowData) => {
 };
 
 
-export const overrideRenderItem = ({ item, index, section }) => (
+export const overrideRenderItem = ({ item, index }) => (
   <View key={index} style={styleListRow.holder}>
     <View style={{ flex: 1 }}>
       <Text
@@ -24,7 +24,7 @@ export const overrideRenderItem = ({ item, index, section }) => (
     />
   </View>
 );
-export const popPost = ({ item, index, section }) => (
+export const popPost = ({ item, index }) => (
   <View key={index} style={styleListRow.holder}>
     <View style={{ flex: 1 }}>
       <Text

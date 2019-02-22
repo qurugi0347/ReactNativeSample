@@ -28,9 +28,9 @@ export default class Home extends Component<Props> {
       pop: popPost,
       lastest: overrideRenderItem
     };
-    for (const key in categoryMap) {
-      result.push({ title: key, data: categoryMap[key], renderItem: funcMapping[key] });
-    }
+    Object.keys(categoryMap).forEach((key, value) => {
+      result.push({ title: key, data: value, renderItem: funcMapping[key] });
+    });
 
     return result;
   }
