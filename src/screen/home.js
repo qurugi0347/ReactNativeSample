@@ -1,33 +1,38 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, ListView, Image } from 'react-native';
+import { StyleSheet, Text, View, SectionList, Image } from 'react-native';
 import { datas } from '../sampleData/postDatas';
-import { popPost } from '../components/mainListItem';
+import { popPost, overrideRenderItem } from '../components/mainListItem';
 
 type Props = {};
 export default class Home extends Component<Props> {
   constructor(props) {
     super(props);
-    const ds = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2,
-      sectionHeaderHasChanged: (s1, s2) => s1 !== s2,
-    });
     const dataMap = this.convertDataArrToSection(datas);
     this.state = {
       //Making data set for list
-      dataSource: ds.cloneWithRowsAndSections(dataMap),
+      dataSource: dataMap,
     };
     console.log(popPost);
   }
 
   convertDataArrToSection(dataArr) {
     const categoryMap = {};
+    const result = [];
     dataArr.forEach((data) => {
       if (!categoryMap[data.category]) {
         categoryMap[data.category] = [];
       }
       categoryMap[data.category].push(data);
     });
-    return categoryMap;
+    const funcMapping = {
+      pop: popPost,
+      lastest: overrideRenderItem
+    };
+    for (const key in categoryMap) {
+      result.push({ title: key, data: categoryMap[key], renderItem: funcMapping[key] });
+    }
+
+    return result;
   }
 
   renderHeader = () => {
@@ -64,67 +69,17 @@ export default class Home extends Component<Props> {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <ListView
-          dataSource={this.state.dataSource}
-          //dataSource to add data in the list
-          renderHeader={this.renderHeader}
-          //Header to show above listview
-          //renderFooter={this.renderFooter}
-          //Footer to show below listview
-          renderSeparator={this.ListViewItemSeparator}
-          //List Item separator
-          renderRow={
-            popPost.bind(this)
-          }
-          renderSeparator={
-            (sectionId, rowId) =>
-              <View key={rowId} style={styleListRow.separator} />
-          }
-          renderSectionHeader={
-            (sectionData, category) => {
-              return (
-                <Text style={{ fontWeight: '700', backgroundColor: '#CFC' }}>{category}</Text>
-              );
-          }}
+        <SectionList
+          sections={this.state.dataSource}
+          renderSectionHeader={({ section: { title } }) => (
+            <Text style={{ fontWeight: 'bold' }}> { title } </Text>
+          )}
+          keyExtractor={(item, index) => item + index}
         />
       </View>
     );
   }
 }
-
-const styleListRow = StyleSheet.create({
-  holder: {
-    padding: 10,
-    flex: 1,
-    flexDirection: 'row',
-  },
-  title: {
-    fontSize: 24,
-  },
-  description: {
-    fontSize: 14,
-  },
-  date: {
-    fontSize: 18,
-  },
-  hashTag: {
-    fontSize: 12,
-    borderWidth: 1,
-    borderColor: '#eee',
-  },
-  sideImg: {
-    alignSelf: 'stretch',
-    right: 0,
-    width: 100,
-    height: 100
-  },
-  separator: {
-    margin: 10,
-    flex: 1,
-    height: StyleSheet.hairlineWidth,
-    backgroundColor: '#8E8E8E',
-  }
-});
 
 const styles = StyleSheet.create({
   container: {

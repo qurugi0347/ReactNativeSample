@@ -6,51 +6,46 @@ const showItem = (rowData) => {
   Alert.alert(rowData.title);
 };
 
-export const popPost = rowData => {
-  switch (rowData.category) {
-    case 'lastest':
-    return (
-      <View style={styleListRow.holder}>
-        <View style={{ flex: 1 }}>
-          <Text
-            style={styleListRow.title}
-            onPress={showItem.bind(this, rowData)}
-          >
-            {rowData.title}
-          </Text>
-        </View>
 
-        <Image
-          style={styleListRow.sideImg}
-          source={{ uri: rowData.imgUrl }}
-        />
-      </View>
-    );//lastest
-    default:
-    return (
-      <View style={styleListRow.holder}>
-        <View style={{ flex: 1 }}>
-          <Text
-            style={styleListRow.title}
-            onPress={showItem.bind(this, rowData)}
-          >
-            {rowData.title}
-          </Text>
-          <Text
-            style={styleListRow.desc}
-          >
-            {rowData.desc}
-          </Text>
-        </View>
+export const overrideRenderItem = ({ item, index, section }) => (
+  <View key={index} style={styleListRow.holder}>
+    <View style={{ flex: 1 }}>
+      <Text
+        style={styleListRow.title}
+        onPress={showItem.bind(this, item)}
+      >
+        {item.title}
+      </Text>
+    </View>
 
-        <Image
-          style={styleListRow.sideImg}
-          source={{ uri: rowData.imgUrl }}
-        />
-      </View>
-    );//default
-  }
-};
+    <Image
+      style={styleListRow.sideImg}
+      source={{ uri: item.imgUrl }}
+    />
+  </View>
+);
+export const popPost = ({ item, index, section }) => (
+  <View key={index} style={styleListRow.holder}>
+    <View style={{ flex: 1 }}>
+      <Text
+        style={styleListRow.title}
+        onPress={showItem.bind(this, item)}
+      >
+        {item.title}
+      </Text>
+      <Text
+        style={styleListRow.desc}
+      >
+        {item.desc}
+      </Text>
+    </View>
+
+    <Image
+      style={styleListRow.sideImg}
+      source={{ uri: item.imgUrl }}
+    />
+  </View>
+);
 
 
 const styleListRow = StyleSheet.create({
