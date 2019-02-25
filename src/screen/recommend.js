@@ -4,7 +4,7 @@ import { datas } from '../sampleData/postDatas';
 import { popPost, overrideRenderItem } from '../components/mainListItem';
 
 type Props = {};
-export default class Home extends Component<Props> {
+export default class Recommend extends Component<Props> {
   constructor(props) {
     super(props);
     const dataMap = this.convertDataArrToSection(datas);
@@ -43,7 +43,7 @@ export default class Home extends Component<Props> {
             width: '100%',
             height: 300,
           }}
-          source={{ uri: 'http://pet.chosun.com/images/news/healthchosun_pet_201802/20180205193238_1635_4749_2414.jpg' }}
+          source={{ uri: 'http://optimal.inven.co.kr/upload/2018/03/26/bbs/i16608864751.jpg' }}
         />
         <View
           style={{
@@ -54,11 +54,11 @@ export default class Home extends Component<Props> {
             height: '100%',
           }}
         >
-          <Text >고양이 넘모 이쁘자너</Text>
+          <Text >매서운 냥냥펀치를 받아랏</Text>
           <Text
             style={styles.hashTag}
           >
-            #고먐미
+            #냥냥펀치
           </Text>
         </View>
 

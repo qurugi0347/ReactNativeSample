@@ -15,6 +15,7 @@ import { createMaterialBottomTabNavigator } from 'react-navigation-material-bott
 import Icon from 'react-native-vector-icons/FontAwesome';
 const myIcon = <Icon name="rocket" size={20} color="#666" />;
 import Home from './screen/home';
+import Recommend from './screen/recommend';
 import Mypage from './screen/mypage';
 import Login from './screen/login';
 
@@ -25,6 +26,13 @@ const mainTabNav = createMaterialBottomTabNavigator({
         title: `홈`,
         tabBarIcon: myIcon
       })
+    },
+    Recommend: {
+      screen: Recommend,
+      navigationOptions: ({ navigation }) => ({
+        title: `추천`,
+        tabBarIcon:<Icon name="star" size={20} color="#666" />
+      }),
     },
     Mypage: {
       screen: Mypage,

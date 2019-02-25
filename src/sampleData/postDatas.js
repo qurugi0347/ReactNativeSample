@@ -11,12 +11,6 @@ export const datas = [
     desc: '네모네모 고먐미의 저주2',
     category: 'pop'
   },
-  {
-    title: '냔캣',
-    imgUrl: 'https://upload.wikimedia.org/wikipedia/ko/thumb/e/ed/Nyan_cat_250px_frame.PNG/220px-Nyan_cat_250px_frame.PNG',
-    desc: '냔냔 냐냐냥',
-    category: 'pop'
-  },
 
   {
     title: '새끼냥 분신술 1',
@@ -29,6 +23,12 @@ export const datas = [
     imgUrl: 'http://newsimg.hankookilbo.com/2016/04/13/201604131460701467_1.jpg',
     desc: '사실 본체였다',
     category: 'lastest'
+  },
+  {
+    title: '냔캣',
+    imgUrl: 'https://upload.wikimedia.org/wikipedia/ko/thumb/e/ed/Nyan_cat_250px_frame.PNG/220px-Nyan_cat_250px_frame.PNG',
+    desc: '냔냔 냐냐냥',
+    category: 'pop'
   },
   {
     title: '새끼냥 분신술 3',
