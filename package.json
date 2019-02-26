@@ -18,7 +18,8 @@
     "react-native-vector-icons": "^6.3.0",
     "react-navigation": "^3.2.1",
     "react-navigation-material-bottom-tabs": "^1.0.0",
-    "react-navigation-tabs": "^1.0.2"
+    "react-navigation-tabs": "^1.0.2",
+    "render-if": "^0.1.1"
   },
   "devDependencies": {
     "babel-core": "7.0.0-bridge.0",
@@ -26,6 +27,7 @@
     "babel-jest": "24.1.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-rallycoding": "^3.2.0",
+    "eslint-plugin-render-if": "^0.1.0",
     "jest": "24.1.0",
     "metro-react-native-babel-preset": "0.51.1",
     "react-test-renderer": "16.6.3"

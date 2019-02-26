@@ -1,5 +1,8 @@
 {
   "extends": "rallycoding",
+  "plugins": [
+    "render-if"
+  ],
   "rules": {
     "arrow-body-style": 0
     },

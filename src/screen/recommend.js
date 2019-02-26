@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Image, ScrollView, Alert } from 'react-native';
 import { SegmentedControls } from 'react-native-radio-buttons';
 import { datas } from '../sampleData/postDatas';
-import { popPost } from '../components/mainListItem';
+import { catPost } from '../components/recommendItem';
 
 type Props = {};
 
@@ -16,7 +16,6 @@ export default class Recommend extends Component<Props> {
       dataSource: dataMap,
       selectedTab: 'all',
     };
-    console.log(popPost);
   }
 
   setSelectedOption(selectedTab) {
@@ -36,8 +35,8 @@ export default class Recommend extends Component<Props> {
     return categoryMap;
   }
 
-  renderContainer(optionNodes) {
-    return <View>{optionNodes}</View>;
+  openItem(data, index) {
+    Alert.alert(data + index);
   }
 
   render() {
@@ -87,7 +86,8 @@ export default class Recommend extends Component<Props> {
         />
 
         {this.state.dataSource.map((item, index) => {
-          return popPost({ item, index });
+          const openItemFunc = this.openItem;
+          return catPost({ item, index }, openItemFunc);
         })}
 
       </ScrollView>

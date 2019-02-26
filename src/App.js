@@ -58,6 +58,7 @@ const rootNav = createStackNavigator(
   },
   {
     initialRouteName: 'Main',
+    headerMode: 'null',
   }
 );
 
