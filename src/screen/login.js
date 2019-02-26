@@ -13,7 +13,7 @@ export default class Mypage extends Component<Props> {
           <Text style={styles.top_text}>회원가입</Text>
         </View>
         <View style={styles.grade_view}>
-          <Text style={styles.grade_text}>회원등급</Text>
+          <Text style={styles.grade_text}>text</Text>
           <Text style={styles.grade_num}>-</Text>
           <Button
             onPress={() => {
@@ -31,7 +31,7 @@ export default class Mypage extends Component<Props> {
               right: 10
             }}
             type="solid"
-            title="할인혜택 보기"
+            title="login"
             color="#AAA"
           />
         </View>
