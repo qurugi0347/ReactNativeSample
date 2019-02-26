@@ -1,11 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import renderIf from 'render-if';
 
-export const catPost = ({ item, index }, onPressItem) => (
-  <View
+export const catPost = ({ item, index }, parent) => (
+  <TouchableOpacity
     key={index}
     style={{ flex: 1 }}
+    onPress={parent.openItem.bind(parent, item, index)}
   >
     <View
       style={styleListRow.holder}
@@ -13,7 +14,6 @@ export const catPost = ({ item, index }, onPressItem) => (
       <View style={{ flex: 1 }}>
         <Text
           style={styleListRow.title}
-          onPress={onPressItem.bind(this, item, index)}
         >
           {item.title}
         </Text>
@@ -30,11 +30,12 @@ export const catPost = ({ item, index }, onPressItem) => (
       />
     </View>
     {renderIf(item.show)(
-        <View>
+        <View style={{ backgroundColor: '#FFE' }}>
           <Text>text</Text>
         </View>
     )}
-  </View>
+
+  </TouchableOpacity>
 );
 
 

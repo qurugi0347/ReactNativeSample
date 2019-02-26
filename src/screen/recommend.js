@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, ScrollView, Alert } from 'react-native';
+import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
 import { SegmentedControls } from 'react-native-radio-buttons';
 import { datas } from '../sampleData/postDatas';
 import { catPost } from '../components/recommendItem';
@@ -23,6 +23,16 @@ export default class Recommend extends Component<Props> {
     this.state.dataSource = this.convertDataArrToSection(datas, selectedTab);
   }
 
+  openItem(data, index) {
+    console.log(this);
+    if (this.state.dataSource[index].show) {
+      this.state.dataSource[index].show = false;
+    } else {
+      this.state.dataSource[index].show = true;
+    }
+    this.forceUpdate();
+  }
+
   convertDataArrToSection(dataArr, tab) {
     const categoryMap = [];
 
@@ -33,10 +43,6 @@ export default class Recommend extends Component<Props> {
     });
 
     return categoryMap;
-  }
-
-  openItem(data, index) {
-    Alert.alert(data + index);
   }
 
   render() {
@@ -86,8 +92,7 @@ export default class Recommend extends Component<Props> {
         />
 
         {this.state.dataSource.map((item, index) => {
-          const openItemFunc = this.openItem;
-          return catPost({ item, index }, openItemFunc);
+          return catPost({ item, index }, this);
         })}
 
       </ScrollView>
