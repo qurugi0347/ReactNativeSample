@@ -92,7 +92,21 @@ export default class Recommend extends Component<Props> {
         />
 
         {this.state.dataSource.map((item, index) => {
-          return catPost({ item, index }, this);
+          return catPost(
+            this,
+            { item, index },
+            this.openItem,
+            (_item, _index) => {
+              this.state.dataSource[_index].imgUrl = 'https://ncache.ilbe.com/files/attach/new/20161210/4255758/8328086177/9139989173/a17acbdceba2947d883c47d251761bb0.JPG';
+              console.log('커여워!!!');
+              this.forceUpdate();
+            },
+            (_item, _index) => {
+              this.state.dataSource[_index].imgUrl = 'https://scontent-atl3-1.cdninstagram.com/vp/4aa45a67951e27a4285bc6460c4a39c7/5CE21DBC/t51.2885-15/e35/47692655_621571138257263_1188373617322883806_n.jpg?_nc_ht=scontent-atl3-1.cdninstagram.com';
+              console.log('냥죽택...');
+              this.forceUpdate();
+            }
+          );
         })}
 
       </ScrollView>

@@ -1,12 +1,13 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { Button } from 'react-native-elements';
 import renderIf from 'render-if';
 
-export const catPost = ({ item, index }, parent) => (
+export const catPost = (parent, { item, index }, onItemPress, onBtn1Press, onBtn2Press) => (
   <TouchableOpacity
     key={index}
     style={{ flex: 1 }}
-    onPress={parent.openItem.bind(parent, item, index)}
+    onPress={onItemPress.bind(parent, item, index)}
   >
     <View
       style={styleListRow.holder}
@@ -31,7 +32,14 @@ export const catPost = ({ item, index }, parent) => (
     </View>
     {renderIf(item.show)(
         <View style={{ backgroundColor: '#FFE' }}>
-          <Text>text</Text>
+          <Button
+            title='고먐미는 커여워'
+            onPress={onBtn1Press.bind(parent, item, index)}
+          />
+          <Button
+            title='사실 안커여워'
+            onPress={onBtn2Press.bind(parent, item, index)}
+          />
         </View>
     )}
 
