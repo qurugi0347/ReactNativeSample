@@ -1,23 +1,12 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
-import { Button } from 'react-native-elements';
+import { SegmentedControls } from 'react-native-radio-buttons';
 import { datas } from '../sampleData/postDatas';
 import { popPost } from '../components/mainListItem';
 
 type Props = {};
 
-const tabs = [{
-  title: 'pop',
-  id: 1
-},
-{
-  title: 'all',
-  id: 3
-},
-{
-  title: 'lastest',
-  id: 2
-}];
+const tabs = ['pop', 'all', 'lastest'];
 export default class Recommend extends Component<Props> {
   constructor(props) {
     super(props);
@@ -25,8 +14,14 @@ export default class Recommend extends Component<Props> {
     this.state = {
       //Making data set for list
       dataSource: dataMap,
+      selectedTab: 'all',
     };
     console.log(popPost);
+  }
+
+  setSelectedOption(selectedTab) {
+    this.setState({ selectedTab });
+    this.state.dataSource = this.convertDataArrToSection(datas, selectedTab);
   }
 
   convertDataArrToSection(dataArr, tab) {
@@ -39,6 +34,10 @@ export default class Recommend extends Component<Props> {
     });
 
     return categoryMap;
+  }
+
+  renderContainer(optionNodes) {
+    return <View>{optionNodes}</View>;
   }
 
   render() {
@@ -81,29 +80,16 @@ export default class Recommend extends Component<Props> {
 
         </View>
 
-        <View
-          stlye={{
-            flex: 1,
-            flexDirection: 'row'
-          }}
-        >
-          {tabs.map((data) => (
-           <Button
-             key={data.id}
-             style={{
-               width: 120,
-               color: '#000',
-             }}
-            title={data.title}
-           />
-         )) }
-        </View>
+        <SegmentedControls
+          options={tabs}
+          onSelection={this.setSelectedOption.bind(this)}
+          selectedOption={this.state.selectedTab}
+        />
 
         {this.state.dataSource.map((item, index) => {
-          console.log(index);
-          console.log(item);
           return popPost({ item, index });
         })}
+
       </ScrollView>
 
 
