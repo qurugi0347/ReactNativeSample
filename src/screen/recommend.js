@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
 import { SegmentedControls } from 'react-native-radio-buttons';
-import { datas } from '../sampleData/postDatas';
+//import { datas } from '../sampleData/postDatas';
 import { catPost } from '../components/recommendItem';
 
 type Props = {};
 
 const tabs = ['pop', 'all', 'lastest'];
+let datas = [];
+
 export default class Recommend extends Component<Props> {
   constructor(props) {
     super(props);
@@ -16,6 +18,23 @@ export default class Recommend extends Component<Props> {
       dataSource: dataMap,
       selectedTab: 'all',
     };
+    this.getData();
+  }
+
+  getData() {
+    fetch('http://localhost:5000/goods/')
+    .then((response) => response.json())
+    .then((responseJson) => {
+      //console.log(responseJson);
+      responseJson.forEach((data) => {
+        datas.push(data);
+      });
+      this.setState({ dataSource: this.convertDataArrToSection(datas) });
+      this.forceUpdate();
+    })
+    .catch((error) => {
+      console.error(error);
+    });
   }
 
   setSelectedOption(selectedTab) {
@@ -24,7 +43,6 @@ export default class Recommend extends Component<Props> {
   }
 
   openItem(data, index) {
-    console.log(this);
     if (this.state.dataSource[index].show) {
       this.state.dataSource[index].show = false;
     } else {
@@ -37,11 +55,17 @@ export default class Recommend extends Component<Props> {
     const categoryMap = [];
 
     dataArr.forEach((data) => {
-      if (tab === undefined || tab === data.category || tab === 'all') {
-        categoryMap.push(data);
+      if (tab === undefined || tab === data.seller || tab === 'all') {
+        //categoryMap.push(data);
+        categoryMap.push({
+          title: data.name,
+          imgUrl: 'http://kstatic.inven.co.kr/upload/2017/12/26/bbs/i15952842969.png',
+          category: data.seller,
+          desc: data.price
+        });
       }
     });
-
+    console.log(categoryMap);
     return categoryMap;
   }
 
@@ -52,6 +76,7 @@ export default class Recommend extends Component<Props> {
           flex: 1
         }}
         stickyHeaderIndices={[1]}
+        onMomentumScrollEnd={this.getData.bind(this)}
       >
         <View
           stlye={{
