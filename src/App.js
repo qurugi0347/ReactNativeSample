@@ -53,12 +53,16 @@ const mainTabNav = createMaterialBottomTabNavigator({
 
 const rootNav = createStackNavigator(
   {
-    Main: {screen: mainTabNav},
+    Main: {
+      screen: mainTabNav,
+      navigationOptions:{
+        header: null
+      }
+    },
     Login: { screen: Login }
   },
   {
     initialRouteName: 'Main',
-    headerMode: 'null',
   }
 );
 

@@ -1,4 +1,7 @@
 {
+  "globals": {
+    "fetch": false
+  },
   "extends": "rallycoding",
   "plugins": [
     "render-if"
@@ -7,6 +10,7 @@
     "arrow-body-style": 0
     },
     "env": {
-        "es6": true
+        "es6": true,
+        "browser": true
     }
 }

@@ -7,7 +7,7 @@ import { catPost } from '../components/recommendItem';
 type Props = {};
 
 const tabs = ['pop', 'all', 'lastest'];
-let datas = [];
+const datas = [];
 
 export default class Recommend extends Component<Props> {
   constructor(props) {
