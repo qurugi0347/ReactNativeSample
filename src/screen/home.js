@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, SectionList, Image } from 'react-native';
+import { StyleSheet, Text, View, SectionList, Image, SafeAreaView } from 'react-native';
 import { datas } from '../sampleData/postDatas';
 import { popPost, overrideRenderItem } from '../components/mainListItem';
 
@@ -37,7 +37,7 @@ export default class Home extends Component<Props> {
 
   renderHeader = () => {
     return (
-      <View>
+      <SafeAreaView>
         <Image
           style={{
             width: '100%',
@@ -62,7 +62,7 @@ export default class Home extends Component<Props> {
           </Text>
         </View>
 
-      </View>
+      </SafeAreaView>
     );
   }
 

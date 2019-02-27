@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Button } from 'react-native-elements';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 
 type Props = {};
 export default class Mypage extends Component<Props> {
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <View style={{ backgroundColor: '#FFF', flex: 1 }}>
+      <SafeAreaView style={{ backgroundColor: '#FFF', flex: 1 }}>
         <View style={styles.top}>
           <Text style={styles.top_text}>로그인</Text>
           <Text style={styles.top_text}>회원가입</Text>
@@ -59,7 +59,7 @@ export default class Mypage extends Component<Props> {
           <Text style={{ fontSize: 24, fontWeight: 'bold' }}>나의 쇼핑정보</Text>
           <View style={{ backgroundColor: '#000', height: 4, marginTop: 10 }} />
         </View>
-      </View>
+      </SafeAreaView>
     );
   }
 }

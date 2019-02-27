@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Button } from 'react-native-elements';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 
 
 type Props = {};
 export default class Mypage extends Component<Props> {
   render() {
     return (
-      <View style={{ backgroundColor: '#FFF', flex: 1 }}>
+      <SafeAreaView style={{ backgroundColor: '#FFF', flex: 1 }}>
         <View style={styles.top}>
           <Text style={styles.top_text}>로그인</Text>
           <Text style={styles.top_text}>회원가입</Text>
@@ -35,7 +35,7 @@ export default class Mypage extends Component<Props> {
             color="#AAA"
           />
         </View>
-      </View>
+      </SafeAreaView>
     );
   }
 }

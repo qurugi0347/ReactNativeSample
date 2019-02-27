@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Image, ScrollView, SafeAreaView } from 'react-native';
 import { SegmentedControls } from 'react-native-radio-buttons';
 //import { datas } from '../sampleData/postDatas';
 import { catPost } from '../components/recommendItem';
@@ -71,71 +71,72 @@ export default class Recommend extends Component<Props> {
 
   render() {
     return (
-      <ScrollView
-        style={{
-          flex: 1
-        }}
-        stickyHeaderIndices={[1]}
-        onMomentumScrollEnd={this.getData.bind(this)}
-      >
-        <View
-          stlye={{
-            flex: 1,
-            backgroundColor: '#ccc'
+      <SafeAreaView style={{ flex: 1 }}>
+        <ScrollView
+          style={{
+            flex: 1
           }}
+          stickyHeaderIndices={[1]}
+          onMomentumScrollEnd={this.getData.bind(this)}
         >
-          <Image
-            style={{
-              width: '100%',
-              height: 300,
-            }}
-            source={{ uri: 'http://optimal.inven.co.kr/upload/2018/03/26/bbs/i16608864751.jpg' }}
-          />
           <View
-            style={{
-              alignItems: 'center',
-              justifyContent: 'center',
-              position: 'absolute',
-              width: '100%',
-              height: '100%',
+            stlye={{
+              flex: 1,
+              backgroundColor: '#ccc'
             }}
           >
-            <Text >매서운 냥냥펀치를 받아랏</Text>
-            <Text
-              style={styles.hashTag}
+            <Image
+              style={{
+                width: '100%',
+                height: 300,
+              }}
+              source={{ uri: 'http://optimal.inven.co.kr/upload/2018/03/26/bbs/i16608864751.jpg' }}
+            />
+            <View
+              style={{
+                alignItems: 'center',
+                justifyContent: 'center',
+                position: 'absolute',
+                width: '100%',
+                height: '100%',
+              }}
             >
-              #냥냥펀치
-            </Text>
+              <Text >매서운 냥냥펀치를 받아랏</Text>
+              <Text
+                style={styles.hashTag}
+              >
+                #냥냥펀치
+              </Text>
+            </View>
+
           </View>
 
-        </View>
+          <SegmentedControls
+            options={tabs}
+            onSelection={this.setSelectedOption.bind(this)}
+            selectedOption={this.state.selectedTab}
+          />
 
-        <SegmentedControls
-          options={tabs}
-          onSelection={this.setSelectedOption.bind(this)}
-          selectedOption={this.state.selectedTab}
-        />
+          {this.state.dataSource.map((item, index) => {
+            return catPost(
+              this,
+              { item, index },
+              this.openItem,
+              (itemData, i) => {
+                this.state.dataSource[i].imgUrl = 'https://ncache.ilbe.com/files/attach/new/20161210/4255758/8328086177/9139989173/a17acbdceba2947d883c47d251761bb0.JPG';
+                this.state.dataSource[i].title = '커엽...';
+                this.forceUpdate();
+              },
+              (itemData, i) => {
+                this.state.dataSource[i].imgUrl = 'https://scontent-atl3-1.cdninstagram.com/vp/4aa45a67951e27a4285bc6460c4a39c7/5CE21DBC/t51.2885-15/e35/47692655_621571138257263_1188373617322883806_n.jpg?_nc_ht=scontent-atl3-1.cdninstagram.com';
+                this.state.dataSource[i].title = '냥죽택!!';
+                this.forceUpdate();
+              }
+            );
+          })}
 
-        {this.state.dataSource.map((item, index) => {
-          return catPost(
-            this,
-            { item, index },
-            this.openItem,
-            (itemData, i) => {
-              this.state.dataSource[i].imgUrl = 'https://ncache.ilbe.com/files/attach/new/20161210/4255758/8328086177/9139989173/a17acbdceba2947d883c47d251761bb0.JPG';
-              this.state.dataSource[i].title = '커엽...';
-              this.forceUpdate();
-            },
-            (itemData, i) => {
-              this.state.dataSource[i].imgUrl = 'https://scontent-atl3-1.cdninstagram.com/vp/4aa45a67951e27a4285bc6460c4a39c7/5CE21DBC/t51.2885-15/e35/47692655_621571138257263_1188373617322883806_n.jpg?_nc_ht=scontent-atl3-1.cdninstagram.com';
-              this.state.dataSource[i].title = '냥죽택!!';
-              this.forceUpdate();
-            }
-          );
-        })}
-
-      </ScrollView>
-
+        </ScrollView>
+      </SafeAreaView>
 
     );
   }
