@@ -1,6 +1,10 @@
 {
-    "parserOptions": {
-        "ecmaVersion": 2017
+  "extends": "rallycoding",
+  "plugins": [
+    "render-if"
+  ],
+  "rules": {
+    "arrow-body-style": 0
     },
     "env": {
         "es6": true
