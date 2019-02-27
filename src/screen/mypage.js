@@ -12,9 +12,11 @@ export default class Mypage extends Component<Props> {
           <Text style={styles.top_text}>로그인</Text>
           <Text style={styles.top_text}>회원가입</Text>
         </View>
-        <View style={styles.grade_view}>
-          <Text style={styles.grade_text}>회원등급</Text>
-          <Text style={styles.grade_num}>-</Text>
+        <View style={[styles.grade_view, { flexDirection: 'row' }]}>
+          <View style={{ flex: 1 }}>
+            <Text style={styles.grade_text}>회원등급</Text>
+            <Text style={styles.grade_num}>-</Text>
+          </View>
           <Button
             onPress={() => {
               navigate('Login');
@@ -23,11 +25,9 @@ export default class Mypage extends Component<Props> {
               backgroundColor: '#AAA',
               width: 140,
               height: 40,
-              position: 'absolute',
               borderRadius: 20,
-              top: -45,
               right: 10,
-              zIndex: 10
+              top: 5
             }}
             type="solid"
             title="할인혜택 보기"
