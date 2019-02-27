@@ -31,13 +31,15 @@ export const catPost = (parent, { item, index }, onItemPress, onBtn1Press, onBtn
       />
     </View>
     {renderIf(item.show)(
-        <View style={{ backgroundColor: '#FFE' }}>
+        <View style={{ backgroundColor: '#FFE', flexDirection: 'row' }}>
           <Button
             title='고먐미는 커여워'
+            containerStyle={{ flex: 1 }}
             onPress={onBtn1Press.bind(parent, item, index)}
           />
           <Button
             title='사실 안커여워'
+            containerStyle={{ flex: 1 }}
             onPress={onBtn2Press.bind(parent, item, index)}
           />
         </View>
