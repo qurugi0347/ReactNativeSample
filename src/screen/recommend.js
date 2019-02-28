@@ -1,28 +1,30 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, ScrollView, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, Image, ScrollView, SafeAreaView, Animated } from 'react-native';
 import { SegmentedControls } from 'react-native-radio-buttons';
-//import { datas } from '../sampleData/postDatas';
+import { datas } from '../sampleData/postDatas';
 import { catPost } from '../components/recommendItem';
 
 type Props = {};
-
 const tabs = ['pop', 'all', 'lastest'];
-const datas = [];
+//const datas = [];
 
 export default class Recommend extends Component<Props> {
   constructor(props) {
     super(props);
     const dataMap = this.convertDataArrToSection(datas);
+    this.offset = 0;
     this.state = {
       //Making data set for list
       dataSource: dataMap,
       selectedTab: 'all',
+      hideHeader: false,
+      headerHeight: Animated.Value(-100)
     };
-    this.getData();
+    //this.getData();
   }
 
   getData() {
-    fetch('http://localhost:5000/goods/')
+    fetch('http://http://10.167.107.1:5000/goods/')
     .then((response) => response.json())
     .then((responseJson) => {
       //console.log(responseJson);
@@ -55,18 +57,26 @@ export default class Recommend extends Component<Props> {
     const categoryMap = [];
 
     dataArr.forEach((data) => {
-      if (tab === undefined || tab === data.seller || tab === 'all') {
-        //categoryMap.push(data);
-        categoryMap.push({
+      if (tab === undefined || tab === data.category || tab === 'all') {
+        categoryMap.push(data);
+        /*categoryMap.push({
           title: data.name,
           imgUrl: 'http://kstatic.inven.co.kr/upload/2017/12/26/bbs/i15952842969.png',
           category: data.seller,
           desc: data.price
-        });
+        });*/
       }
     });
     console.log(categoryMap);
     return categoryMap;
+  }
+  animHeader(direction) {
+    Animated.timing(
+      this.state.headerHeight,
+      {
+        toValue: direction ? 0 : -100
+      }
+    ).start();
   }
 
   render() {
@@ -76,8 +86,25 @@ export default class Recommend extends Component<Props> {
           style={{
             flex: 1
           }}
-          stickyHeaderIndices={[1]}
-          onMomentumScrollEnd={this.getData.bind(this)}
+          scrollEventThrottle={1}
+          onScroll={(event) => {
+            const currentOffset = event.nativeEvent.contentOffset.y;
+            const dif = currentOffset - (this.offset || 0);
+
+            console.log(this.state.headerHeight);
+            if (Math.abs(dif) < 3) {
+              console.log('unclear');
+            } else {
+              let direction = false;
+              if (dif > 0) {
+                direction = true;
+                console.log('사라져라');
+              } else {
+                console.log('생겨라');
+              }
+              this.animHeader(direction);
+            }
+          }}
         >
           <View
             stlye={{
@@ -110,7 +137,6 @@ export default class Recommend extends Component<Props> {
             </View>
 
           </View>
-
           <SegmentedControls
             options={tabs}
             onSelection={this.setSelectedOption.bind(this)}
@@ -136,11 +162,25 @@ export default class Recommend extends Component<Props> {
           })}
 
         </ScrollView>
+        <Animated.View
+          style={{
+            position: 'absolute',
+            top: 0,
+            transform: [{ translateY: this.state.headerHeight }] }}
+        >
+          <SegmentedControls
+            options={tabs}
+            onSelection={this.setSelectedOption.bind(this)}
+            selectedOption={this.state.selectedTab}
+          />
+        </Animated.View>
       </SafeAreaView>
+
 
     );
   }
 }
+
 
 const styles = StyleSheet.create({
   container: {
